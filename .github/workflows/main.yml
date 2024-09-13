@@ -44,18 +44,8 @@ jobs:
     - name: Install Python Dependencies
       run: |
         python -m pip install --upgrade pip
+        pip install pygame
   
-    - name: Flet Build Web
-      run: |
-            echo "GITHUB_REPOSITORY: ${GITHUB_REPOSITORY}, USER: ${GITHUB_REPOSITORY%/*}, PROJECT_BASE_URL: ${GITHUB_REPOSITORY#*/}"
-            flutter config --no-analytics
-            flet build web --base-url ${GITHUB_REPOSITORY#*/} --route-url-strategy hash
-
-    - name: Upload Artifact
-      uses: actions/upload-pages-artifact@v3
-      with:
-        name: web-build-artifact  # the name of the artifact
-        path: build/web
 
   deploy:
     needs: build  # wait for the "build" job to get done before executing this "deploy" job
@@ -80,6 +70,4 @@ jobs:
         if: github.event_name == 'push'  # deploy only on push
         id: deployment
         uses: actions/deploy-pages@v4.0.5
-        with:
-          artifact_name: web-build-artifact
         
