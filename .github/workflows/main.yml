@@ -30,7 +30,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install pygame
 
-    - name: Run Alien Invasion Game
+    - name: Run Alien Invasion Game (Headless)
       run: |
-        python alien_invasion.py
-
+        SDL_AUDIODRIVER=dummy python alien_invasion.py
