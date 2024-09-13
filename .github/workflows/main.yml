@@ -28,4 +28,4 @@ jobs:
 
     - name: Run game
       run: |
-        alien_invasion.py
+        python alien_invasion.py
